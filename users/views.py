@@ -4,6 +4,16 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+
+
+class GoogleLogin(SocialLoginView):  # if you want to use Authorization Code Grant, use this
+    adapter_class = GoogleOAuth2Adapter
+    # callback_url =
+    client_class = OAuth2Client
+
 
 User = get_user_model()
 
